@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PuwaVoice（プワボイス）｜ Coming Soon</title>
+<meta name="description" content="PuwaVoiceは、あなたのPCの中で2人のボイスロイドとおしゃべりできるアプリです。完全ローカル動作で開発中。Coming Soon。">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<style>
+  :root{
+    --pink:#ff6b8a;
+    --pink-deep:#e84a6f;
+    --red:#ff5252;
+    --pink-soft:#ffe3ea;
+    --pink-pale:#fff5f7;
+    --cream:#fffafc;
+    --ink:#5a3a42;
+    --ink-soft:#9a6b76;
+    --card:#ffffff;
+    --radius:28px;
+    --shadow:0 10px 30px rgba(232,74,111,.14);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:"Hiragino Maru Gothic ProN","Hiragino Sans","Hiragino Kaku Gothic ProN",
+      -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans JP",sans-serif;
+    color:var(--ink);
+    background:
+      radial-gradient(circle at 12% 8%, var(--pink-soft) 0, transparent 34%),
+      radial-gradient(circle at 88% 18%, #ffd9e2 0, transparent 30%),
+      radial-gradient(circle at 50% 105%, var(--pink-soft) 0, transparent 45%),
+      var(--cream);
+    line-height:1.8;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+  }
+  .wrap{width:min(960px,100% - 40px);margin:0 auto;}
+
+  /* ---------- header ---------- */
+  header{padding:22px 0 6px;}
+  .brand{display:flex;align-items:center;gap:12px;}
+  .brand .mark{width:44px;height:44px;flex:none;}
+  .brand .name{font-size:1.45rem;font-weight:800;letter-spacing:.02em;color:var(--pink-deep);}
+  .brand .name small{display:block;font-size:.72rem;font-weight:600;color:var(--ink-soft);letter-spacing:.14em;}
+
+  /* ---------- hero ---------- */
+  .hero{text-align:center;padding:52px 0 30px;position:relative;}
+  .puff{
+    display:inline-block;background:var(--card);border-radius:999px;
+    padding:8px 22px;font-weight:700;color:var(--pink-deep);
+    box-shadow:var(--shadow);font-size:.9rem;letter-spacing:.08em;
+  }
+  .hero h1{
+    margin:26px 0 6px;
+    font-size:clamp(2.6rem,9vw,4.6rem);
+    font-weight:900;letter-spacing:.03em;line-height:1.15;
+    background:linear-gradient(92deg,var(--red),var(--pink) 55%,var(--pink-deep));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .hero .tagline{
+    margin:14px auto 0;max-width:34em;
+    font-size:clamp(1rem,3.4vw,1.2rem);font-weight:600;color:var(--ink);
+  }
+  .hero .sub{margin-top:10px;color:var(--ink-soft);font-size:.95rem;}
+  .bubble-row{display:flex;justify-content:center;gap:14px;margin-top:30px;}
+  .bubble{
+    width:56px;height:56px;border-radius:50%;
+    display:grid;place-items:center;background:var(--card);box-shadow:var(--shadow);
+  }
+  .bubble svg{width:30px;height:30px;}
+  .bubble.pink{background:linear-gradient(145deg,var(--pink),var(--pink-deep));}
+  .bubble.soft{background:var(--pink-soft);}
+
+  /* ---------- features ---------- */
+  .features{padding:28px 0 8px;}
+  .features h2{
+    text-align:center;font-size:1.35rem;font-weight:800;color:var(--pink-deep);
+    margin-bottom:6px;
+  }
+  .features .lead{text-align:center;color:var(--ink-soft);font-size:.95rem;margin-bottom:24px;}
+  .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;}
+  .card{
+    background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);
+    padding:26px 24px;border:3px solid var(--pink-pale);
+  }
+  .card .icon{
+    width:52px;height:52px;border-radius:18px;background:var(--pink-soft);
+    display:grid;place-items:center;margin-bottom:12px;
+  }
+  .card .icon svg{width:28px;height:28px;}
+  .card h3{font-size:1.08rem;font-weight:800;margin-bottom:6px;}
+  .card p{font-size:.94rem;color:var(--ink-soft);}
+  .badge{
+    display:inline-block;background:var(--pink-soft);color:var(--pink-deep);
+    border-radius:999px;padding:1px 12px;font-size:.75rem;font-weight:700;
+    margin-left:8px;vertical-align:middle;letter-spacing:.06em;
+  }
+
+  /* ---------- note ---------- */
+  .note{
+    margin:30px 0 10px;background:var(--pink-pale);border:3px dashed #ffc2d1;
+    border-radius:var(--radius);padding:24px 26px;text-align:center;
+  }
+  .note h2{font-size:1.1rem;font-weight:800;color:var(--pink-deep);margin-bottom:6px;}
+  .note p{font-size:.95rem;color:var(--ink);}
+
+  /* ---------- footer ---------- */
+  footer{margin-top:auto;padding:38px 0 30px;text-align:center;color:var(--ink-soft);font-size:.88rem;}
+  footer .heart{color:var(--pink);}
+
+  @media (max-width:640px){
+    .grid{grid-template-columns:1fr;}
+    .hero{padding:38px 0 22px;}
+    .card{padding:22px 20px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap brand">
+    <svg class="mark" viewBox="0 0 64 64" aria-hidden="true">
+      <path d="M32 6c13.8 0 25 9.6 25 21.4 0 11.9-11.2 21.5-25 21.5-2.9 0-5.7-.4-8.3-1.2L12 56l2.3-10.4C8.7 41.4 7 34.7 7 27.4 7 15.6 18.2 6 32 6z" fill="#ff6b8a"/>
+      <rect x="21" y="23" width="4.6" height="14" rx="2.3" fill="#fff"/>
+      <rect x="29.7" y="18" width="4.6" height="24" rx="2.3" fill="#fff"/>
+      <rect x="38.4" y="25" width="4.6" height="10" rx="2.3" fill="#fff"/>
+    </svg>
+    <div class="name">PuwaVoice<small>プワボイス</small></div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="hero">
+    <span class="puff">🌸 開発中のおしらせ 🌸</span>
+    <h1>Coming Soon</h1>
+    <p class="tagline">作業中も、2人のボイスロイドとおしゃべりできる。<br>あなたのPCの中で動く、小さな通話アプリを開発中です。</p>
+    <p class="sub">話しかけると、2人の声がその場で返事をしてくれる。そんな毎日を目指しています。</p>
+    <div class="bubble-row" aria-hidden="true">
+      <div class="bubble pink">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M12 3a3 3 0 0 1 3 3v5a3 3 0 1 1-6 0V6a3 3 0 0 1 3-3z" fill="#fff"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
+      </div>
+      <div class="bubble soft">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M4 6h16M4 12h10M4 18h13" stroke="#e84a6f" stroke-width="2.4" stroke-linecap="round"/></svg>
+      </div>
+      <div class="bubble">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M12 20s-7-4.5-9-9c-1.2-2.8.6-6 3.7-6C9 5 12 8 12 8s3-3 5.3-3C20.4 5 22.2 8.2 21 11c-2 4.5-9 9-9 9z" fill="#ff6b8a"/></svg>
+      </div>
+    </div>
+  </section>
+
+  <section class="features">
+    <h2>どんなアプリ？</h2>
+    <p class="lead">PuwaVoiceは、現在開発中のアプリです。搭載予定の機能をご紹介します。</p>
+    <div class="grid">
+
+      <article class="card">
+        <div class="icon">
+          <svg viewBox="0 0 24 24" fill="none"><rect x="5" y="10" width="14" height="10" rx="3" fill="#ff6b8a"/><path d="M8 10V7a4 4 0 0 1 8 0v3" stroke="#e84a6f" stroke-width="2.2" stroke-linecap="round"/></svg>
+        </div>
+        <h3>完全ローカルで動作<span class="badge">開発中</span></h3>
+        <p>音声も会話も、あなたのPCの中だけで処理します。声も会話も外に出ないので、安心しておしゃべりできます。</p>
+      </article>
+
+      <article class="card">
+        <div class="icon">
+          <svg viewBox="0 0 24 24" fill="none"><circle cx="8.5" cy="9" r="3.4" fill="#ff6b8a"/><circle cx="15.5" cy="9" r="3.4" fill="#ff9db1"/><path d="M3.5 19c.6-2.8 2.6-4.2 5-4.2s4.4 1.4 5 4.2M10.5 19c.6-2.8 2.6-4.2 5-4.2 1.6 0 3 .6 3.9 1.8" stroke="#e84a6f" stroke-width="2" stroke-linecap="round"/></svg>
+        </div>
+        <h3>2人と同時に話せる<span class="badge">開発中</span></h3>
+        <p>ボイスロイド2人と同時に通話できる設計です。にぎやかな掛け合いも、落ち着いた相談も、その日の気分で。</p>
+      </article>
+
+      <article class="card">
+        <div class="icon">
+          <svg viewBox="0 0 24 24" fill="none"><circle cx="6" cy="12" r="2.6" fill="#ff6b8a"/><circle cx="18" cy="6" r="2.6" fill="#ff9db1"/><circle cx="18" cy="18" r="2.6" fill="#e84a6f"/><path d="M8.3 10.8 15.6 7M8.3 13.2l7.3 3.6" stroke="#ffb3c2" stroke-width="2"/></svg>
+        </div>
+        <h3>MCPでAIエージェントとつながる<span class="badge">開発中</span></h3>
+        <p>MCP（Model Context Protocol）に対応し、お使いのAIエージェントと連携できるように開発中です。調べものや作業のお願いは、エージェントが受け取ってくれます。</p>
+      </article>
+
+      <article class="card">
+        <div class="icon">
+          <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="4.5" rx="2.25" fill="#ff6b8a"/><circle cx="7" cy="14.5" r="2" fill="#ff9db1"/><circle cx="12.5" cy="14.5" r="2" fill="#e84a6f"/><circle cx="18" cy="14.5" r="2" fill="#ffb3c2"/></svg>
+        </div>
+        <h3>Macのメニューバーに常駐<span class="badge">開発中</span></h3>
+        <p>Macのメニューバーにそっと常駐します。ウィンドウを閉じても動き続けるので、話したいときにすぐ通話を始められます。</p>
+      </article>
+
+    </div>
+  </section>
+
+  <section class="note">
+    <h2>声について</h2>
+    <p>PuwaVoiceのアプリ本体に、キャラクターの声は含まれません。<br>声はユーザーが自分で用意する方式です。お気に入りの声を、あなた自身で連れてきてください。</p>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>© 2026 PuwaVoice</p>
+    <p>ふわっと、声のそばに。<span class="heart">♥</span></p>
+  </div>
+</footer>
+
+</body>
+</html>
