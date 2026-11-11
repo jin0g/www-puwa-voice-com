@@ -14,20 +14,46 @@
 </script>
 <title>PuwaVoice（プワボイス）｜ Coming Soon</title>
 <meta name="description" content="PuwaVoiceは、VOICEVOXのキャラクターと音声でおしゃべりできる、iPhone・iPad・Mac向けの通話アプリです。初期パートナーはずんだもんと春日部つむぎ。基本無料、現在開発中。Coming Soon。">
+<link rel="canonical" href="https://puwavoice.com/">
+<meta name="theme-color" content="#ff8297">
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="PuwaVoice">
+<meta property="og:title" content="PuwaVoice（プワボイス）｜ Coming Soon">
+<meta property="og:description" content="PuwaVoiceは、VOICEVOXのキャラクターと音声でおしゃべりできる、iPhone・iPad・Mac向けの通話アプリです。初期パートナーはずんだもんと春日部つむぎ。基本無料、現在開発中。Coming Soon。">
+<meta property="og:url" content="https://puwavoice.com/">
+<meta property="og:image" content="https://puwavoice.com/og-image.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="PuwaVoice（プワボイス）｜ 好きなキャラクターの声とおしゃべりできる通話アプリ">
+<meta property="og:locale" content="ja_JP">
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@puwavoice">
+<meta name="twitter:title" content="PuwaVoice（プワボイス）｜ Coming Soon">
+<meta name="twitter:description" content="PuwaVoiceは、VOICEVOXのキャラクターと音声でおしゃべりできる、iPhone・iPad・Mac向けの通話アプリです。初期パートナーはずんだもんと春日部つむぎ。基本無料、現在開発中。Coming Soon。">
+<meta name="twitter:image" content="https://puwavoice.com/og-image.png">
+<meta name="twitter:image:alt" content="PuwaVoice（プワボイス）｜ 好きなキャラクターの声とおしゃべりできる通話アプリ">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="icon" type="image/png" sizes="512x512" href="icon-512.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 <style>
   :root{
     --pink:#ff6b8a;
     --pink-deep:#e84a6f;
     --red:#ff5252;
+    --teal:#00c5b7;
+    --teal-deep:#00a396;
     --pink-soft:#ffe3ea;
-    --pink-pale:#fff5f7;
-    --cream:#fffafc;
     --ink:#5a3a42;
-    --ink-soft:#9a6b76;
-    --card:#ffffff;
-    --radius:28px;
-    --shadow:0 10px 30px rgba(232,74,111,.14);
+    --ink-soft:#8d6470;
+    --glass:rgba(255,255,255,.55);
+    --glass-strong:rgba(255,255,255,.68);
+    --glass-border:rgba(255,255,255,.75);
+    --radius:30px;
+    --shadow:0 18px 45px rgba(160,50,90,.16), 0 4px 14px rgba(0,150,140,.08);
+    --shadow-soft:0 10px 30px rgba(160,50,90,.12);
   }
   *{margin:0;padding:0;box-sizing:border-box;}
   html{scroll-behavior:smooth;}
@@ -35,37 +61,99 @@
     font-family:"Hiragino Maru Gothic ProN","Hiragino Sans","Hiragino Kaku Gothic ProN",
       -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans JP",sans-serif;
     color:var(--ink);
-    background:
-      radial-gradient(circle at 12% 8%, var(--pink-soft) 0, transparent 34%),
-      radial-gradient(circle at 88% 18%, #ffd9e2 0, transparent 30%),
-      radial-gradient(circle at 50% 105%, var(--pink-soft) 0, transparent 45%),
-      var(--cream);
     line-height:1.8;
     min-height:100vh;
     display:flex;
     flex-direction:column;
+    position:relative;
+    overflow-x:hidden;
+    background:#fff2f4;
   }
-  .wrap{width:min(960px,100% - 40px);margin:0 auto;}
+  /* liquid gradient backdrop: pink -> teal, like the app icon */
+  body::before{
+    content:"";position:fixed;inset:0;z-index:-2;
+    background:
+      radial-gradient(52rem 34rem at 8% -6%, rgba(255,130,151,.55) 0, transparent 60%),
+      radial-gradient(46rem 32rem at 96% 4%, rgba(0,197,183,.5) 0, transparent 62%),
+      radial-gradient(40rem 30rem at 88% 96%, rgba(0,197,183,.34) 0, transparent 60%),
+      radial-gradient(44rem 32rem at 4% 100%, rgba(252,99,157,.4) 0, transparent 62%),
+      linear-gradient(115deg,#ffe9ee 0%,#fff7f5 42%,#eafaf7 100%);
+  }
+  body::after{
+    content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+    background:
+      radial-gradient(16rem 16rem at 78% 30%, rgba(255,255,255,.5) 0, transparent 70%),
+      radial-gradient(11rem 11rem at 16% 58%, rgba(255,255,255,.45) 0, transparent 70%);
+    animation:drift 16s ease-in-out infinite alternate;
+  }
+  @keyframes drift{
+    from{transform:translate3d(0,0,0) scale(1);}
+    to{transform:translate3d(0,-14px,0) scale(1.04);}
+  }
+  @media (prefers-reduced-motion: reduce){
+    body::after{animation:none;}
+  }
+  .wrap{width:min(980px,100% - 40px);margin:0 auto;}
+
+  .glass{
+    background:var(--glass);
+    -webkit-backdrop-filter:blur(20px) saturate(170%);
+    backdrop-filter:blur(20px) saturate(170%);
+    border:1px solid var(--glass-border);
+    box-shadow:var(--shadow), inset 0 1px 0 rgba(255,255,255,.85);
+  }
 
   /* ---------- header ---------- */
-  header{padding:22px 0 6px;}
-  .brand{display:flex;align-items:center;gap:12px;}
-  .brand .mark{width:44px;height:44px;flex:none;}
-  .brand .name{font-size:1.45rem;font-weight:800;letter-spacing:.02em;color:var(--pink-deep);}
-  .brand .name small{display:block;font-size:.72rem;font-weight:600;color:var(--ink-soft);letter-spacing:.14em;}
+  header{padding:20px 0 4px;}
+  .brandbar{
+    display:flex;align-items:center;gap:12px;
+    border-radius:999px;padding:10px 22px 10px 12px;
+  }
+  .brandbar .appicon{
+    width:46px;height:46px;flex:none;border-radius:13px;
+    box-shadow:0 6px 16px rgba(160,50,90,.25);
+  }
+  .brandbar .name{font-size:1.4rem;font-weight:800;letter-spacing:.02em;line-height:1.25;
+    background:linear-gradient(92deg,var(--pink-deep),var(--teal-deep));
+    -webkit-background-clip:text;background-clip:text;color:transparent;}
+  .brandbar .name small{display:block;font-size:.7rem;font-weight:600;color:var(--ink-soft);letter-spacing:.16em;
+    -webkit-text-fill-color:var(--ink-soft);}
+  .brandbar .xlink{
+    margin-left:auto;flex:none;display:inline-flex;align-items:center;gap:7px;
+    font-size:.85rem;font-weight:700;color:var(--ink);text-decoration:none;
+    background:rgba(255,255,255,.65);border:1px solid var(--glass-border);
+    border-radius:999px;padding:6px 16px;
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .brandbar .xlink:hover{transform:translateY(-1px);box-shadow:var(--shadow-soft);}
+  .brandbar .xlink svg{width:15px;height:15px;}
 
   /* ---------- hero ---------- */
-  .hero{text-align:center;padding:52px 0 30px;position:relative;}
+  .hero{padding:30px 0 8px;}
+  .hero-panel{
+    border-radius:38px;padding:52px 30px 44px;text-align:center;position:relative;overflow:hidden;
+  }
+  .hero-panel::before{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background:linear-gradient(160deg,rgba(255,255,255,.55) 0%,rgba(255,255,255,0) 42%);
+  }
+  .hero .appicon-big{
+    width:clamp(120px,26vw,168px);height:auto;border-radius:24%;
+    box-shadow:0 22px 44px rgba(160,50,90,.28), 0 4px 12px rgba(0,150,140,.15);
+    border:1px solid rgba(255,255,255,.8);
+  }
   .puff{
-    display:inline-block;background:var(--card);border-radius:999px;
-    padding:8px 22px;font-weight:700;color:var(--pink-deep);
-    box-shadow:var(--shadow);font-size:.9rem;letter-spacing:.08em;
+    display:inline-block;margin-top:30px;
+    background:rgba(255,255,255,.7);border:1px solid var(--glass-border);
+    -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+    border-radius:999px;padding:7px 22px;font-weight:700;color:var(--pink-deep);
+    font-size:.9rem;letter-spacing:.08em;box-shadow:var(--shadow-soft);
   }
   .hero h1{
-    margin:26px 0 6px;
+    margin:22px 0 4px;
     font-size:clamp(2.6rem,9vw,4.6rem);
     font-weight:900;letter-spacing:.03em;line-height:1.15;
-    background:linear-gradient(92deg,var(--red),var(--pink) 55%,var(--pink-deep));
+    background:linear-gradient(94deg,var(--red) 0%,var(--pink) 38%,var(--pink-deep) 62%,var(--teal) 108%);
     -webkit-background-clip:text;background-clip:text;color:transparent;
   }
   .hero .tagline{
@@ -73,89 +161,104 @@
     font-size:clamp(1rem,3.4vw,1.2rem);font-weight:600;color:var(--ink);
   }
   .hero .sub{margin-top:10px;color:var(--ink-soft);font-size:.95rem;}
-  .bubble-row{display:flex;justify-content:center;gap:14px;margin-top:30px;}
+  .bubble-row{display:flex;justify-content:center;gap:14px;margin-top:32px;}
   .bubble{
     width:56px;height:56px;border-radius:50%;
-    display:grid;place-items:center;background:var(--card);box-shadow:var(--shadow);
+    display:grid;place-items:center;
+    background:var(--glass-strong);border:1px solid var(--glass-border);
+    -webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
+    box-shadow:var(--shadow-soft), inset 0 1px 0 rgba(255,255,255,.9);
   }
   .bubble svg{width:30px;height:30px;}
-  .bubble.pink{background:linear-gradient(145deg,var(--pink),var(--pink-deep));}
-  .bubble.soft{background:var(--pink-soft);}
+  .bubble.pink{background:linear-gradient(145deg,var(--pink),var(--pink-deep));border-color:rgba(255,255,255,.5);}
+  .bubble.teal{background:linear-gradient(145deg,var(--teal),var(--teal-deep));border-color:rgba(255,255,255,.5);}
 
   /* ---------- features ---------- */
-  .features{padding:28px 0 8px;}
+  .features{padding:34px 0 8px;}
   .features h2{
-    text-align:center;font-size:1.35rem;font-weight:800;color:var(--pink-deep);
-    margin-bottom:6px;
+    text-align:center;font-size:1.4rem;font-weight:800;margin-bottom:6px;
+    background:linear-gradient(92deg,var(--pink-deep),var(--teal-deep));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
   }
-  .features .lead{text-align:center;color:var(--ink-soft);font-size:.95rem;margin-bottom:24px;}
-  .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;}
+  .features .lead{text-align:center;color:var(--ink-soft);font-size:.95rem;margin-bottom:26px;}
+  .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;}
   .card{
-    background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);
-    padding:26px 24px;border:3px solid var(--pink-pale);
+    border-radius:var(--radius);padding:28px 26px;
+    transition:transform .18s ease, box-shadow .18s ease;
   }
+  .card:hover{transform:translateY(-3px);}
   .card .icon{
-    width:52px;height:52px;border-radius:18px;background:var(--pink-soft);
-    display:grid;place-items:center;margin-bottom:12px;
+    width:54px;height:54px;border-radius:19px;
+    background:linear-gradient(150deg,rgba(255,227,234,.95),rgba(214,246,242,.95));
+    border:1px solid rgba(255,255,255,.85);
+    display:grid;place-items:center;margin-bottom:14px;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.95), 0 6px 14px rgba(160,50,90,.10);
   }
   .card .icon svg{width:28px;height:28px;}
   .card h3{font-size:1.08rem;font-weight:800;margin-bottom:6px;}
   .card p{font-size:.94rem;color:var(--ink-soft);}
   .badge{
-    display:inline-block;background:var(--pink-soft);color:var(--pink-deep);
+    display:inline-block;background:linear-gradient(120deg,var(--pink-soft),#d9f5f1);color:var(--pink-deep);
+    border:1px solid rgba(255,255,255,.8);
     border-radius:999px;padding:1px 12px;font-size:.75rem;font-weight:700;
     margin-left:8px;vertical-align:middle;letter-spacing:.06em;
   }
 
   /* ---------- note ---------- */
   .note{
-    margin:30px 0 10px;background:var(--pink-pale);border:3px dashed #ffc2d1;
-    border-radius:var(--radius);padding:24px 26px;text-align:center;
+    margin:34px 0 12px;border-radius:var(--radius);padding:28px 26px;text-align:center;
   }
-  .note h2{font-size:1.1rem;font-weight:800;color:var(--pink-deep);margin-bottom:6px;}
+  .note h2{font-size:1.12rem;font-weight:800;color:var(--pink-deep);margin-bottom:8px;}
   .note p{font-size:.95rem;color:var(--ink);}
+  .note .credits{margin-top:10px;font-size:.88rem;color:var(--ink-soft);}
 
   /* ---------- footer ---------- */
-  footer{margin-top:auto;padding:38px 0 30px;text-align:center;color:var(--ink-soft);font-size:.88rem;}
+  footer{margin-top:auto;padding:40px 0 32px;text-align:center;color:var(--ink-soft);font-size:.88rem;}
   footer .heart{color:var(--pink);}
 
   @media (max-width:640px){
     .grid{grid-template-columns:1fr;}
-    .hero{padding:38px 0 22px;}
-    .card{padding:22px 20px;}
+    .hero{padding:22px 0 4px;}
+    .hero-panel{padding:40px 20px 34px;border-radius:30px;}
+    .card{padding:24px 21px;}
+    .brandbar .name{font-size:1.2rem;}
   }
 </style>
 </head>
 <body>
 
 <header>
-  <div class="wrap brand">
-    <svg class="mark" viewBox="0 0 64 64" aria-hidden="true">
-      <path d="M32 6c13.8 0 25 9.6 25 21.4 0 11.9-11.2 21.5-25 21.5-2.9 0-5.7-.4-8.3-1.2L12 56l2.3-10.4C8.7 41.4 7 34.7 7 27.4 7 15.6 18.2 6 32 6z" fill="#ff6b8a"/>
-      <rect x="21" y="23" width="4.6" height="14" rx="2.3" fill="#fff"/>
-      <rect x="29.7" y="18" width="4.6" height="24" rx="2.3" fill="#fff"/>
-      <rect x="38.4" y="25" width="4.6" height="10" rx="2.3" fill="#fff"/>
-    </svg>
-    <div class="name">PuwaVoice<small>プワボイス</small></div>
+  <div class="wrap">
+    <div class="brandbar glass">
+      <img class="appicon" src="icon-512.png" alt="PuwaVoice アプリアイコン" width="46" height="46">
+      <div class="name">PuwaVoice<small>プワボイス</small></div>
+      <a class="xlink" href="https://x.com/puwavoice" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.9 2H22l-6.8 7.8L23.3 22h-6.3l-4.9-6.4L6.5 22H3.4l7.3-8.3L1 2h6.5l4.4 5.9L18.9 2zm-1.1 18h1.7L7.1 3.9H5.3L17.8 20z"/></svg>
+        @puwavoice
+      </a>
+    </div>
   </div>
 </header>
 
 <main class="wrap">
 
   <section class="hero">
-    <span class="puff">🌸 開発中のおしらせ 🌸</span>
-    <h1>Coming Soon</h1>
-    <p class="tagline">作業中も、好きなキャラクターの声とおしゃべりできる。<br>iPhone・iPad・Macで動く、小さな通話アプリを開発中です。</p>
-    <p class="sub">話しかけると、ずんだもんと春日部つむぎがその場で返事をしてくれる。そんな毎日を目指しています。</p>
-    <div class="bubble-row" aria-hidden="true">
-      <div class="bubble pink">
-        <svg viewBox="0 0 24 24" fill="none"><path d="M12 3a3 3 0 0 1 3 3v5a3 3 0 1 1-6 0V6a3 3 0 0 1 3-3z" fill="#fff"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
-      </div>
-      <div class="bubble soft">
-        <svg viewBox="0 0 24 24" fill="none"><path d="M4 6h16M4 12h10M4 18h13" stroke="#e84a6f" stroke-width="2.4" stroke-linecap="round"/></svg>
-      </div>
-      <div class="bubble">
-        <svg viewBox="0 0 24 24" fill="none"><path d="M12 20s-7-4.5-9-9c-1.2-2.8.6-6 3.7-6C9 5 12 8 12 8s3-3 5.3-3C20.4 5 22.2 8.2 21 11c-2 4.5-9 9-9 9z" fill="#ff6b8a"/></svg>
+    <div class="hero-panel glass">
+      <img class="appicon-big" src="icon-512.png" alt="PuwaVoice アプリアイコン" width="336" height="336">
+      <div><span class="puff">🌸 開発中のおしらせ 🌸</span></div>
+      <h1>Coming Soon</h1>
+      <p class="tagline">作業中も、好きなキャラクターの声とおしゃべりできる。<br>iPhone・iPad・Macで動く、小さな通話アプリを開発中です。</p>
+      <p class="sub">話しかけると、ずんだもんと春日部つむぎがその場で返事をしてくれる。そんな毎日を目指しています。</p>
+      <div class="bubble-row" aria-hidden="true">
+        <div class="bubble pink">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M12 3a3 3 0 0 1 3 3v5a3 3 0 1 1-6 0V6a3 3 0 0 1 3-3z" fill="#fff"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
+        </div>
+        <div class="bubble">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M4 6h16M4 12h10M4 18h13" stroke="#e84a6f" stroke-width="2.4" stroke-linecap="round"/></svg>
+        </div>
+        <div class="bubble teal">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M12 20s-7-4.5-9-9c-1.2-2.8.6-6 3.7-6C9 5 12 8 12 8s3-3 5.3-3C20.4 5 22.2 8.2 21 11c-2 4.5-9 9-9 9z" fill="#fff"/></svg>
+        </div>
       </div>
     </div>
   </section>
@@ -165,33 +268,33 @@
     <p class="lead">PuwaVoiceは、現在開発中のアプリです。搭載予定の機能をご紹介します。</p>
     <div class="grid">
 
-      <article class="card">
+      <article class="card glass">
         <div class="icon">
-          <svg viewBox="0 0 24 24" fill="none"><rect x="5" y="10" width="14" height="10" rx="3" fill="#ff6b8a"/><path d="M8 10V7a4 4 0 0 1 8 0v3" stroke="#e84a6f" stroke-width="2.2" stroke-linecap="round"/></svg>
+          <svg viewBox="0 0 24 24" fill="none"><rect x="5" y="10" width="14" height="10" rx="3" fill="#ff6b8a"/><path d="M8 10V7a4 4 0 0 1 8 0v3" stroke="#00a396" stroke-width="2.2" stroke-linecap="round"/></svg>
         </div>
         <h3>音声はあなたの端末の中で処理<span class="badge">開発中</span></h3>
         <p>声の合成と聞き取りは、アプリに内蔵のエンジンがあなたの端末の中で処理します。会話の文脈はあなたのiCloudに保存され、開発者のサーバーには置きません。</p>
       </article>
 
-      <article class="card">
+      <article class="card glass">
         <div class="icon">
-          <svg viewBox="0 0 24 24" fill="none"><circle cx="8.5" cy="9" r="3.4" fill="#ff6b8a"/><circle cx="15.5" cy="9" r="3.4" fill="#ff9db1"/><path d="M3.5 19c.6-2.8 2.6-4.2 5-4.2s4.4 1.4 5 4.2M10.5 19c.6-2.8 2.6-4.2 5-4.2 1.6 0 3 .6 3.9 1.8" stroke="#e84a6f" stroke-width="2" stroke-linecap="round"/></svg>
+          <svg viewBox="0 0 24 24" fill="none"><circle cx="8.5" cy="9" r="3.4" fill="#ff6b8a"/><circle cx="15.5" cy="9" r="3.4" fill="#00c5b7"/><path d="M3.5 19c.6-2.8 2.6-4.2 5-4.2s4.4 1.4 5 4.2M10.5 19c.6-2.8 2.6-4.2 5-4.2 1.6 0 3 .6 3.9 1.8" stroke="#e84a6f" stroke-width="2" stroke-linecap="round"/></svg>
         </div>
         <h3>好きなキャラクターを選べる<span class="badge">開発中</span></h3>
         <p>初期設定のパートナーは、ずんだもんと春日部つむぎの2人。設定で1人だけにしたり、四国めたんや小夜/SAYOに交代させたりもできます。にぎやかな掛け合いも、落ち着いた相談も、その日の気分で。</p>
       </article>
 
-      <article class="card">
+      <article class="card glass">
         <div class="icon">
-          <svg viewBox="0 0 24 24" fill="none"><circle cx="6" cy="12" r="2.6" fill="#ff6b8a"/><circle cx="18" cy="6" r="2.6" fill="#ff9db1"/><circle cx="18" cy="18" r="2.6" fill="#e84a6f"/><path d="M8.3 10.8 15.6 7M8.3 13.2l7.3 3.6" stroke="#ffb3c2" stroke-width="2"/></svg>
+          <svg viewBox="0 0 24 24" fill="none"><circle cx="6" cy="12" r="2.6" fill="#ff6b8a"/><circle cx="18" cy="6" r="2.6" fill="#00c5b7"/><circle cx="18" cy="18" r="2.6" fill="#e84a6f"/><path d="M8.3 10.8 15.6 7M8.3 13.2l7.3 3.6" stroke="#7fd8cf" stroke-width="2"/></svg>
         </div>
         <h3>MCPでAIエージェントとつながる<span class="badge">開発中</span></h3>
         <p>MCP（Model Context Protocol）に対応し、お使いのAIエージェントと連携できるように開発中です。調べものや作業のお願いは、エージェントが受け取ってくれます。</p>
       </article>
 
-      <article class="card">
+      <article class="card glass">
         <div class="icon">
-          <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="4.5" rx="2.25" fill="#ff6b8a"/><circle cx="7" cy="14.5" r="2" fill="#ff9db1"/><circle cx="12.5" cy="14.5" r="2" fill="#e84a6f"/><circle cx="18" cy="14.5" r="2" fill="#ffb3c2"/></svg>
+          <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="4.5" rx="2.25" fill="#ff6b8a"/><circle cx="7" cy="14.5" r="2" fill="#00c5b7"/><circle cx="12.5" cy="14.5" r="2" fill="#e84a6f"/><circle cx="18" cy="14.5" r="2" fill="#ffb3c2"/></svg>
         </div>
         <h3>基本無料ではじめられる<span class="badge">開発中</span></h3>
         <p>1日10分まで無料で通話できます（混雑していない時は、長めに話せることも）。月額500円のプランでは、時間を気にせずおしゃべりできます。</p>
@@ -200,9 +303,10 @@
     </div>
   </section>
 
-  <section class="note">
+  <section class="note glass">
     <h2>声について</h2>
-    <p>PuwaVoiceには、VOICEVOXのキャラクターの声があらかじめ入っています。<br>ずんだもん、春日部つむぎ、四国めたん、小夜/SAYO の声でおしゃべりできます。<br>VOICEVOX:ずんだもん／VOICEVOX:春日部つむぎ／VOICEVOX:四国めたん／VOICEVOX:小夜/SAYO</p>
+    <p>PuwaVoiceには、VOICEVOXのキャラクターの声があらかじめ入っています。<br>ずんだもん、春日部つむぎ、四国めたん、小夜/SAYO の声でおしゃべりできます。</p>
+    <p class="credits">VOICEVOX:ずんだもん／VOICEVOX:春日部つむぎ／VOICEVOX:四国めたん／VOICEVOX:小夜/SAYO</p>
   </section>
 
 </main>
